@@ -1,1 +1,231 @@
-s
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign-up - QuickChat - Simple Chat Application</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="card" style="width:700px;">
+                    <div class="card-header">Sign Up</div>
+                    <div class="card-body">
+                        <form id="signupForm">
+                            <!-- Username Input Field -->
+                            <div class="form-group row mt-2">
+                                <label for="username" class="col-md-4 text-md-right">Username:</label>
+                                <div class="col-md-8">
+                                    <input type="text" id="username" name="username" class="form-control"
+                                        placeholder="Enter your Username" required>
+                                    <span class="text-danger" id="usernameErr"></span>
+                                </div>
+                            </div>
+
+                            <!-- Email Input Field -->
+                            <div class="form-group row mt-2">
+                                <label for="email" class="col-md-4 text-md-right">Email Address:</label>
+                                <div class="col-md-8">
+                                    <input type="email" id="email" name="email" class="form-control"
+                                        placeholder="Enter your Email Address" required>
+                                    <span class="text-danger" id="emailErr"></span>
+                                </div>
+                            </div>
+
+                            <!-- Password Input Field with Eye Icon -->
+                            <div class="form-group row mt-2">
+                                <label for="password" class="col-md-4 text-md-right">Password:</label>
+                                <div class="col-md-8 position-relative">
+                                    <input type="password" id="password" name="password" class="form-control"
+                                        placeholder="Enter your Password" required>
+                                    <i class="fa fa-eye position-absolute" id="togglePassword"
+                                        style="top: 10px; right: 15px; cursor: pointer;"></i>
+                                    <span class="text-danger" id="passwordErr"></span>
+                                </div>
+                            </div>
+
+                            <!-- Confirm Password Input Field with Eye Icon -->
+                            <div class="form-group row mt-2">
+                                <label for="confirmPassword" class="col-md-4 text-md-right">Confirm Password:</label>
+                                <div class="col-md-8 position-relative">
+                                    <input type="password" id="confirmPassword" name="confirmPassword"
+                                        class="form-control" placeholder="Confirm your Password" required>
+                                    <i class="fa fa-eye position-absolute" id="toggleConfirmPassword"
+                                        style="top: 10px; right: 15px; cursor: pointer;"></i>
+                                    <span class="text-danger" id="confirmPasswordErr"></span>
+                                </div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="form-group row mt-2">
+                                <div class="col-md-8 offset-md-4">
+                                    <button type="submit" id="registerUser" class="btn btn-primary">Sign Up</button>
+                                    <p class="text-black mt-2">
+                                        Already have an Account? <a href="index.html"
+                                            style="text-decoration: none;">Login Here</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin="anonymous"></script>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
+        import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-database.js";
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBfd2248DUNdP9XrOT5DoHreovxydRy9qs",
+            authDomain: "quickchatapp-d83a2.firebaseapp.com",
+            databaseURL: "https://quickchatapp-d83a2-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "quickchatapp-d83a2",
+            storageBucket: "quickchatapp-d83a2.appspot.com",
+            messagingSenderId: "588119145594",
+            appId: "1:588119145594:web:cac385ca995fcb5dc48fc3",
+            measurementId: "G-3M7FWYVPQR"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase();
+        const auth = getAuth(app);
+
+        // Add an event listener to the form submission
+        document.getElementById('signupForm').addEventListener('submit', async function (e) {
+            e.preventDefault(); // Prevent form from submitting
+
+            const username = document.getElementById("username").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value;
+
+            // Validate password and confirm password match
+            const confirmPassword = document.getElementById("confirmPassword").value;
+            if (password !== confirmPassword) {
+                $('#confirmPasswordErr').text('Passwords do not match.');
+                return;
+            } else {
+                $('#confirmPasswordErr').text('');
+            }
+
+            // Check if the username or email already exists
+            const usersRef = ref(db, 'registered_users');
+            const snapshot = await get(usersRef);
+
+            let usernameExists = false;
+            let emailExists = false;
+
+            if (snapshot.exists()) {
+                const users = snapshot.val();
+                for (const key in users) {
+                    if (users[key].username === username) {
+                        usernameExists = true;
+                    }
+                    if (users[key].email === email) {
+                        emailExists = true;
+                    }
+                }
+            }
+
+            if (usernameExists) {
+                $('#usernameErr').text('This username is already taken. Please choose another one.');
+                return;
+            } else {
+                $('#usernameErr').text('');
+            }
+
+            if (emailExists) {
+                $('#emailErr').text('This email is already registered. Please log in.');
+                return;
+            } else {
+                $('#emailErr').text('');
+            }
+
+            // Create user in Firebase Authentication
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+
+                // Store additional user information in the database
+                await set(ref(db, 'registered_users/' + user.uid), {
+                    username: username,
+                    email: email
+                });
+
+                // Show success modal
+                $('#successModal').modal('show');
+
+                // Redirect after a short delay
+                setTimeout(() => {
+                    window.location.href = 'index.html'; // Change to your login page
+                }, 2000);
+
+            } catch (error) {
+                if (error.code === 'auth/email-already-in-use') {
+                    $('#emailErr').text('This email is already registered.');
+                } else if (error.code === 'auth/invalid-email') {
+                    $('#emailErr').text('Please enter a valid email address.');
+                } else {
+                    console.error(error);
+                    alert('Error during registration: ' + error.message);
+                }
+            }
+        });
+
+        // Toggle password visibility
+        document.getElementById("togglePassword").onclick = function () {
+            const passwordInput = document.getElementById("password");
+            const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+            passwordInput.setAttribute("type", type);
+            this.classList.toggle("fa-eye-slash");
+        };
+
+        document.getElementById("toggleConfirmPassword").onclick = function () {
+            const confirmPasswordInput = document.getElementById("confirmPassword");
+            const type = confirmPasswordInput.getAttribute("type") === "password" ? "text" : "password";
+            confirmPasswordInput.setAttribute("type", type);
+            this.classList.toggle("fa-eye-slash");
+        };
+    </script>
+
+    <!-- Bootstrap Modal for Success Message -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="successModalLabel">Sign-Up Successful!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    You have successfully registered. You will be redirected shortly.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
