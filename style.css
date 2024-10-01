@@ -10,10 +10,10 @@ body {
     text-rendering: optimizeLegibility;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
     font-family: Georgia, 'Times New Roman', Times, serif;
-}
-
-/* Basic form styling */
-form {
+ }
+ 
+ /* Basic form styling */
+ form {
     max-width: 500px;
     margin: 0 auto;
     padding: 20px;
@@ -23,17 +23,17 @@ form {
     width: 100%;
     display: flex;
     flex-direction: column;
-}
-
-/* Form labels */
-label {
+ }
+ 
+ /* Form labels */
+ label {
     font-weight: bold;
     font-size: 1rem;
     color: #333;
-}
-
-/* Input fields */
-input.form-control {
+ }
+ 
+ /* Input fields */
+ input.form-control {
     border: 1px solid #4a90e2;
     border-radius: 4px;
     padding: 10px;
@@ -42,19 +42,19 @@ input.form-control {
     outline: none;
     width: 100%;
     margin-bottom: 15px;
-}
-
-/* Eye icon for password visibility */
-#togglePassword {
+ }
+ 
+ /* Eye icon for password visibility */
+ #togglePassword {
     color: #6c757d;
     top: 50%;
     transform: translateY(-50%);
     right: 15px;
     cursor: pointer;
-}
-
-/* Button styles */
-button.btn-primary {
+ }
+ 
+ /* Button styles */
+ button.btn-primary {
     background-color: #007bff;
     border-color: #007bff;
     color: white;
@@ -63,42 +63,42 @@ button.btn-primary {
     border-radius: 5px;
     transition: background-color 0.3s ease;
     width: 100%;
-}
-
-button.btn-primary:hover {
+ }
+ 
+ button.btn-primary:hover {
     background-color: #0056b3;
     border-color: #004085;
-}
-
-/* Error message styling */
-span.text-danger {
+ }
+ 
+ /* Error message styling */
+ span.text-danger {
     font-size: 0.875rem;
     color: #dc3545;
-}
-
-/* "Remember Me" checkbox */
-.checkbox label {
+ }
+ 
+ /* "Remember Me" checkbox */
+ .checkbox label {
     font-size: 0.9rem;
     color: #555;
-}
-
-/* Sign-up text */
-p.text-black {
+ }
+ 
+ /* Sign-up text */
+ p.text-black {
     font-size: 0.9rem;
     color: #333;
-}
-
-p.text-black a {
+ }
+ 
+ p.text-black a {
     color: #007bff;
     text-decoration: none;
-}
-
-p.text-black a:hover {
+ }
+ 
+ p.text-black a:hover {
     text-decoration: underline;
-}
-
-/* Chats container */
-.chats {
+ }
+ 
+ /* Chats container */
+ .chats {
     max-width: 600px;
     margin: 20px auto;
     padding: 20px;
@@ -109,30 +109,30 @@ p.text-black a:hover {
     overflow-y: auto; /* Enable vertical scrolling */
     background-color: #f8f9fa; /* Light background */
     border: 1px solid #ddd; /* Optional border */
-}
-
-/* Scrollbar styling */
-.chats::-webkit-scrollbar {
+ }
+ 
+ /* Scrollbar styling */
+ .chats::-webkit-scrollbar {
     width: 8px; /* Width of the scrollbar */
-}
-
-.chats::-webkit-scrollbar-thumb {
+ }
+ 
+ .chats::-webkit-scrollbar-thumb {
     background-color: #007bff; /* Color of the scrollbar */
     border-radius: 10px; /* Rounded corners for the scrollbar */
-}
-
-.chats::-webkit-scrollbar-track {
+ }
+ 
+ .chats::-webkit-scrollbar-track {
     background: #f1f1f1; /* Background of the scrollbar */
-}
-
-/* Chat bubbles */
-.chat-bubble-container {
+ }
+ 
+ /* Chat bubbles */
+ .chat-bubble-container {
     list-style: none; /* Remove bullet points */
     padding: 10px; /* Padding around message bubbles */
     margin: 0;
-}
-
-.chat-bubble {
+ }
+ 
+ .chat-bubble {
     max-width: 75%;
     padding: 10px 15px;
     border-radius: 20px;
@@ -140,20 +140,20 @@ p.text-black a:hover {
     color: #fff;
     word-wrap: break-word;
     position: relative; /* For the triangle effect */
-}
-
-/* Sent messages */
-.sent {
+ }
+ 
+ /* Sent messages */
+ .sent {
     display: flex;
     justify-content: flex-end;
-}
-
-.sent .chat-bubble {
+ }
+ 
+ .sent .chat-bubble {
     background-color: #007bff;
     border-radius: 20px 20px 0 20px; /* Rounded corners */
-}
-
-.sent .chat-bubble::after {
+ }
+ 
+ .sent .chat-bubble::after {
     content: '';
     position: absolute;
     bottom: 100%; /* Position above the bubble */
@@ -161,20 +161,20 @@ p.text-black a:hover {
     border-width: 5px;
     border-style: solid;
     border-color: transparent transparent #007bff transparent; /* Triangle for sent messages */
-}
-
-/* Received messages */
-.reply {
+ }
+ 
+ /* Received messages */
+ .reply {
     display: flex;
     justify-content: flex-start;
-}
-
-.reply .chat-bubble {
+ }
+ 
+ .reply .chat-bubble {
     background-color: #28a745;
     border-radius: 20px 20px 20px 0; /* Rounded corners */
-}
-
-.reply .chat-bubble::after {
+ }
+ 
+ .reply .chat-bubble::after {
     content: '';
     position: absolute;
     bottom: 100%; /* Position above the bubble */
@@ -182,63 +182,63 @@ p.text-black a:hover {
     border-width: 5px;
     border-style: solid;
     border-color: transparent transparent #28a745 transparent; /* Triangle for received messages */
-}
-
-/* Message time and sender name */
-.message-info {
+ }
+ 
+ /* Message time and sender name */
+ .message-info {
     font-size: 0.75rem;
     color: #ccc;
     margin-top: 5px;
-}
-
-/* Responsive styles */
-@media (max-width: 576px) {
+ }
+ 
+ /* Responsive styles */
+ @media (max-width: 576px) {
     form {
         padding: 15px;
         width: 95%;
     }
-
+ 
     input.form-control {
         padding: 8px;
         font-size: 0.9rem;
     }
-
+ 
     button.btn-primary {
         font-size: 1rem;
         padding: 10px;
     }
-
+ 
     label {
         font-size: 0.9rem;
     }
-
+ 
     span.text-danger {
         font-size: 0.75rem;
     }
-
+ 
     .checkbox label {
         font-size: 0.8rem;
     }
-
+ 
     p.text-black {
         font-size: 0.8rem;
     }
-
+ 
     .chat-bubble {
         max-width: 90%; /* More width for smaller screens */
     }
-}
-
-@media (min-width: 577px) and (max-width: 768px) {
+ }
+ 
+ @media (min-width: 577px) and (max-width: 768px) {
     form {
         padding: 25px;
     }
-
+ 
     input.form-control {
         font-size: 1rem;
     }
-
+ 
     button.btn-primary {
         font-size: 1.1rem;
     }
-}
+ }
