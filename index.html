@@ -80,63 +80,63 @@
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
         crossorigin="anonymous"></script>
 
-    <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
-
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyBfd2248DUNdP9XrOT5DoHreovxydRy9qs",
-            authDomain: "quickchatapp-d83a2.firebaseapp.com",
-            databaseURL: "https://quickchatapp-d83a2-default-rtdb.asia-southeast1.firebasedatabase.app",
-            projectId: "quickchatapp-d83a2",
-            storageBucket: "quickchatapp-d83a2.appspot.com",
-            messagingSenderId: "588119145594",
-            appId: "1:588119145594:web:cac385ca995fcb5dc48fc3",
-            measurementId: "G-3M7FWYVPQR"
-        };
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-
-        // Authentication Function
-        function authenticateFromFirebase(email, password) {
-            const auth = getAuth(app);
-            signInWithEmailAndPassword(auth, email, password)
-                .then((userCredentials) => {
-                    const user = userCredentials.user; // Here is where 'user' is defined
-                    console.log('User:', user); // Log the user object
-                    alert('Successfully Logged In');
-                    localStorage.setItem("loggedin_user_id", user.uid);
-                    localStorage.setItem("loggedin_user_email", user.email);
-                    location.href = "start-chat.html"; // Redirect to chat page
-                })
-                .catch((error) => {
-                    const errorMessage = error.message;
-                    // Display error message
-                    $("#emailErr").text(errorMessage);
-                });
-        }
-
-        // Button Click Handler
-        $("#loginForm").on('submit', function (e) {
-            e.preventDefault(); // Prevent form from submitting normally
-            const email = $("#email").val();
-            const password = $("#password").val();
-
-            console.log('Attempting to log in with:', email, password); // Log email and password values
-            authenticateFromFirebase(email, password);
-        });
-
-        // Password toggle functionality
-        $("#togglePassword").on('click', function () {
-            const passwordField = $("#password");
-            const type = passwordField.attr("type") === "password" ? "text" : "password";
-            passwordField.attr("type", type);
-            $(this).toggleClass("fa-eye fa-eye-slash");
-        });
-    </script>
+        <script type="module">
+            // Import the functions you need from the SDKs you need
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+            import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
+        
+            // Your web app's Firebase configuration
+            const firebaseConfig = {
+                apiKey: "AIzaSyBfd2248DUNdP9XrOT5DoHreovxydRy9qs",
+                authDomain: "quickchatapp-d83a2.firebaseapp.com",
+                databaseURL: "https://quickchatapp-d83a2-default-rtdb.asia-southeast1.firebasedatabase.app",
+                projectId: "quickchatapp-d83a2",
+                storageBucket: "quickchatapp-d83a2.appspot.com",
+                messagingSenderId: "588119145594",
+                appId: "1:588119145594:web:cac385ca995fcb5dc48fc3",
+                measurementId: "G-3M7FWYVPQR"
+            };
+        
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+        
+            // Authentication Function
+            function authenticateFromFirebase(email, password) {
+                const auth = getAuth(app);
+                signInWithEmailAndPassword(auth, email, password)
+                    .then((userCredentials) => {
+                        const user = userCredentials.user; // Here is where 'user' is defined
+                        console.log('User:', user); // Log the user object
+                        alert('Successfully Logged In');
+                        localStorage.setItem("loggedin_user_id", user.uid);
+                        localStorage.setItem("loggedin_user_email", user.email);
+                        location.href = "start-chat.html"; // Redirect to chat page
+                    })
+                    .catch((error) => {
+                        const errorMessage = error.message;
+                        // Display error message
+                        $("#emailErr").text(errorMessage);
+                    });
+            }
+        
+            // Button Click Handler
+            $("#loginForm").on('submit', function(e) {
+                e.preventDefault(); // Prevent form from submitting normally
+                const email = $("#email").val();
+                const password = $("#password").val();
+        
+                console.log('Attempting to log in with:', email, password); // Log email and password values
+                authenticateFromFirebase(email, password);
+            });
+        
+            // Password toggle functionality
+            $("#togglePassword").on('click', function() {
+                const passwordField = $("#password");
+                const type = passwordField.attr("type") === "password" ? "text" : "password";
+                passwordField.attr("type", type);
+                $(this).toggleClass("fa-eye fa-eye-slash");
+            });
+        </script>        
     <script src="validation.js"></script>
 </body>
 
